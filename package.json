@@ -3,9 +3,7 @@
   "version": "1.0.0",
   "description": "Test",
   "main": "server.js",
-  "dependencies": {
-    "camel-case": "^3.0.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "nodemon": "^1.19.0"
   },
@@ -21,7 +19,7 @@
   "author": "Karin Cheng",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/marissaverdonck/BlokTech_DatingApp/issues"
+    "url": "https://github.com/KarinCheng/BlokTechDatingApp/issues"
   },
-  "homepage": "https://github.com/marissaverdonck/BlokTech_DatingApp#readme"
+  "homepage": "https://github.com/KarinCheng/BlokTechDatingApp/blob/master/README.md"
 }

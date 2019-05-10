@@ -1,0 +1,27 @@
+{
+  "name": "Week1",
+  "version": "1.0.0",
+  "description": "Test",
+  "main": "server.js",
+  "dependencies": {
+    "camel-case": "^3.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KarinCheng/BlokTechDatingApp.git"
+  },
+  "keywords": [],
+  "author": "Karin Cheng",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/marissaverdonck/BlokTech_DatingApp/issues"
+  },
+  "homepage": "https://github.com/marissaverdonck/BlokTech_DatingApp#readme"
+}

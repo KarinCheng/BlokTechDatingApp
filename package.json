@@ -1,7 +1,7 @@
 {
-  "name": "Week1",
+  "name": "datingapp",
   "version": "1.0.0",
-  "description": "Test",
+  "description": "app to match people together who have the same music taste",
   "main": "server.js",
   "dependencies": {},
   "devDependencies": {

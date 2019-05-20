@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "app to match people together who have the same music taste",
   "main": "server.js",
-  "dependencies": {},
+  "dependencies": {
+    "cowsay": "^1.4.0",
+    "lodash": "^4.17.11"
+  },
   "devDependencies": {
     "nodemon": "^1.19.0"
   },

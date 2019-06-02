@@ -1,36 +1,42 @@
 /* eslint-disable semi */
 
 const express = require("express")
-const server = express()
+const app = express()
 const port = 3000
+var path = require('path')
 
-server.set("view engine", "ejs")
+app.set("view engine", "ejs")
 
 var mime = {
   '.html': 'text/html',
   '.css': 'text/css'
 }
 
-server.get("/", (req, res) => {
+app.get("/", (req, res) => {
+  var type = mime|| 'text/plain'
+  res.setHeader('Content-Type', type)
   res.render("index")
 })
 
-server.get("/filter", (req, res) => {
+app.get("/filter", (req, res) => {
+  var type = mime || 'text/plain'
+  res.setHeader('Content-Type', type)
   res.render("filter.ejs")
 })
 
-server.get("/login", (req, res) => {
+app.get("/login", (req, res) => {
+  var type = mime || 'text/plain'
+  res.setHeader('Content-Type', type)
   res.render("login.ejs")
 })
 
-express()
-.use(notFound)
+app.use(notFound)
 
 function notFound (req, res) {
   res.statusCode = 404
   res.end("Not found\n")
 }
 
-server.use(express.static("public"))
+app.use(express.static("public"))
 
-server.listen(port, () => console.log(`Example app listening on port ${port}!`))
+app.listen(port, () => console.log(`Example app listening on port ${port}!`))

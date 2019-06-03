@@ -6,6 +6,7 @@ var find = require('array-find')
 var data = [
   {
     id: 'pop',
+    genre: 'Pop',
     member: [
       {
         name: 'Jose',
@@ -23,6 +24,7 @@ var data = [
   },
   {
     id: 'rock',
+    genre: 'Rock',
     member: [
       {
         name: 'Noah',
@@ -40,6 +42,7 @@ var data = [
   },
   {
     id: 'jazz',
+    genre: 'Jazz',
     member: [
       {
         name: 'Benjamin',
@@ -57,6 +60,7 @@ var data = [
   },
   {
     id: 'metal',
+    genre: 'Metal',
     member: [
       {
         name: 'Oliver',
@@ -74,6 +78,7 @@ var data = [
   },
   {
     id: 'classical',
+    genre: 'Classical',
     member: [
       {
         name: 'Lucas',
@@ -91,6 +96,7 @@ var data = [
   },
   {
     id: 'country',
+    genre: 'Country',
     member: [
       {
         name: 'James',
@@ -109,70 +115,43 @@ var data = [
 ]
 
 express()
-.use(express.static('static'))
+  .use(express.static('static'))
   .get('/', filter)
   .get('/:id', match)
-  .get('/:id', profile)
   .use(notFound)
   .listen(3000)
 
 //filter page
 function filter(req, res) {
   var doc = '<!doctype html>'
+  var length = data.length
+  var index = -1
+  var profile = data
 
   doc += '<title>Filter</title>'
   doc += '<link rel=stylesheet href=/index.css>'
   doc += '<h1>Choose your favorite music genre</h1>'
-  doc += '<p><a href= "/' + profile.id + '">Pop</a></p>'
-  doc += '<p><a href= "/' + profile.id + '">Pop</a></p>'
-  doc += '<p><a href= "/' + profile.id + '">Pop</a></p>'
-  doc += '<p><a href= "/' + profile.id + '">Pop</a></p>'
-  doc += '<p><a href= "/' + profile.id + '">Pop</a></p>'
-  doc += '<p><a href= "/' + profile.id + '">Pop</a></p>'
+
+  while (++index < length) {
+    profile = data[index]
+    doc += '<h2><a href="/' + profile.id + '">' + profile.genre + '</a></h2>'
+  }
 
   res.send(doc)
 }
 
 //match page
 function match(req, res) {
-  var doc = '<!doctype html>'
-  var length = 1
-  var index = -1
-  var profile
-
-  doc += '<title>Match</title>'
-  doc += '<link rel=stylesheet href=/index.css>'
-  doc += '<h1>You got a match!</h1>'
-
-  while (++index < length) {
-    profile = data[index]
-    doc += '<h2>' + profile.name + '</h2>'
-    doc += '<p><a href="/' + profile.id + '"> View profile </a></p>'
-  }
-  res.send(doc)
-}
-
-//profile details
-function profile(req, res, next) {
   var id = req.params.id
   var doc = '<!doctype html>'
-  var profile = find(data, function (value) {
+  var match = find(data, function (value) {
     return value.id === id
   })
 
-  if (!filter) {
-    next()
-    return
-  }
-
-  doc += '<title>' + profile.name + ' - Profile</title>'
+  doc += '<title>' + match.member[0].name + '- Match</title>'
   doc += '<link rel=stylesheet href=/index.css>'
-  doc += '<h1>' + profile.name + '</h1>'
-  doc += '<h2>' + profile.age + '</h2>'
-  doc += '<h2>' + profile.city + '</h2>'
-  doc += '<p>' + profile.bio + '</p>'
-  doc += '<p>' + profile.favMusic + '</p>'
-  doc += '<p>' + profile.question + '</p>'
+  doc += '<h1>You got a match with ' + match.member[0].name+ '!</h1>'
+  doc += '<p><a href= "/' + match.member[0].name + '">View profile</a></p>'
 
   res.send(doc)
 }

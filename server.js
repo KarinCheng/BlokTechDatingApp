@@ -19,7 +19,7 @@ var data = [
           'Avicii, Aloe Blacc - SOS'
         ],
         question: 'You should leave a comment if you like Harry Potter and want to discuss it further.'
-      }
+      },
     ]
   },
   {
@@ -116,54 +116,50 @@ var data = [
 
 express()
   .use(express.static('static'))
+  .set('view engine', 'ejs')
+  .set('views', 'view')
   .get('/', filter)
   .get('/:id', match)
+  .get('/:id', profile)
   .use(notFound)
   .listen(3000)
 
 //filter page
 function filter(req, res) {
-  var doc = '<!doctype html>'
-  var length = data.length
-  var index = -1
-  var profile = data
-
-  doc += '<title>Filter</title>'
-  doc += '<link rel=stylesheet href=/index.css>'
-  doc += '<h1>Choose your favorite music genre</h1>'
-
-  while (++index < length) {
-    profile = data[index]
-    doc += '<h2><a href="/' + profile.id + '">' + profile.genre + '</a></h2>'
-  }
-
-  res.send(doc)
+  res.render('filter.ejs', {data: data})
 }
 
 //match page
-function match(req, res) {
+function match(req, res, next) {
   var id = req.params.id
-  var doc = '<!doctype html>'
   var match = find(data, function (value) {
     return value.id === id
   })
 
-  doc += '<title>' + match.member[0].name + '- Match</title>'
-  doc += '<link rel=stylesheet href=/index.css>'
-  doc += '<h1>You got a match with ' + match.member[0].name+ '!</h1>'
-  doc += '<p><a href= "/' + match.member[0].name + '">View profile</a></p>'
+  if (!match) {
+    next()
+    return
+  }
 
-  res.send(doc)
+  res.render('match.ejs', {data: match})
+}
+
+//profile page
+function profile(req, res, next) {
+  var name = req.params.name
+  var profile = find(data, function (value) {
+    return value.name === name
+  })
+
+  if (!profile) {
+    next()
+    return
+  }
+
+  res.render('profile.ejs', {data: profile})
 }
 
 //404 page
 function notFound(req, res) {
-  var doc = '<!doctype html>'
-
-  doc += '<title>Not found - Match</title>'
-  doc += '<link rel=stylesheet href=/index.css>'
-  doc += '<h1>Not found</h1>'
-  doc += '<p>Uh oh! We couldn’t find this page!</p>'
-
-  res.status(404).send(doc)
+  res.status(404).render('not-found.ejs')
 }

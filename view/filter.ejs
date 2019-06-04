@@ -1,0 +1,7 @@
+<% include head.ejs %>
+<title>Filter</title>
+<h1>Choose your favorite music genre</h1>
+<% for (var index = 0; index < data.length; index++) { %>
+<h2><a href="/<%= data[index].id %>"><%= data[index].genre %></a></h2>
+<% } %>
+<% include tail.ejs %>

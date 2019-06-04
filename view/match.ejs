@@ -1,0 +1,5 @@
+<% include head.ejs %>
+<title class = 'pickMember'> <%= data.member[0].name %> - Match</title>
+<h1>You got a match with <%= data.member[0].name %>!</h1>
+<p><a href="/<%= data.member[0].name %>">View profile</a></p>
+<% include tail.ejs %>

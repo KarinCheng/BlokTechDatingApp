@@ -120,7 +120,7 @@ express()
   .set('views', 'view')
   .get('/', filter)
   .get('/:id', match)
-  .get('/:id', profile)
+  .get('/:name', profile)
   .use(notFound)
   .listen(3000)
 
@@ -146,9 +146,9 @@ function match(req, res, next) {
 
 //profile page
 function profile(req, res, next) {
-  var name = req.params.name
+  var name = req.params.member
   var profile = find(data, function (value) {
-    return value.name === name
+    return value.id.member === name
   })
 
   if (!profile) {
